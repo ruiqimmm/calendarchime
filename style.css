@@ -268,3 +268,16 @@ body {
 #weather {
     color: white;
 }
+
+#sketch-holder {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+}
+
+#sketch-holder canvas {
+    width: 100%;
+    height: auto;
+    margin: 0;
+    padding: 0;
+}
