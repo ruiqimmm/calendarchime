@@ -2,80 +2,119 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Bouncing — Livestream</title>
     <style>
+        html,
         body {
+            height: 100%;
             margin: 0;
-            background-color: #ffffff;
-            color: #000000;
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            padding: 40px 20px;
+            text: #464646;
         }
 
-        h1 {
-            font-size: 2rem;
-            margin-bottom: 0.5em;
+        body {
+            height: 100svh;
+            /* 关键：整页高度锁定 */
+            overflow: hidden;
+            /* 不滚动 */
+            color: var(--text);
+            font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+            font-weight: 300;
+            /* Light weight */
+
+
+
+            font-size: clamp(12px, 1.5vw, 14px);
+            /* 自适应字号，避免小屏溢出 */
+            display: grid;
+            grid-template-rows:
+                auto 50svh auto=1fr auto auto;
+
+            align-items: center;
+            justify-items: center;
+            text-align: center;
+            gap: 0.8rem;
+            /* 各块之间的间距 */
+            padding: 12px;
+            /* 四周留白，避免贴边 */
+            background: #f9faf7;
+            letter-spacing: 0.05em;
+
+            top: 40%;
+            left: 40%;
         }
 
         p {
-            margin: 0.3em 0;
-            font-size: 1rem;
+            margin: 0;
         }
 
-        .video-container {
-            margin: 30px 0;
+        /* 顶部三行打包，便于整体微调间距 */
+        .top *+* {
+            margin-top: 0.25em;
+        }
+
+        /* 视频容器：宽度自适应，固定高度=50svh，保持16:9 */
+        .video {
+            height: 60svh;
+            width: min(92vw, calc(50svh * 16/9));
+
             position: relative;
-            padding-bottom: 56.25%;
-            height: 0;
-            width: 100%;
-            max-width: 800px;
         }
 
-        .video-container iframe {
+        .video iframe {
             position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            border: none;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            border: 0;
         }
 
         .credits {
-            font-size: 0.85rem;
-            margin-top: 2em;
-            opacity: 0.6;
+            opacity: .6;
         }
 
         a {
-            color: #000000;
+            color: #4f4f4f;
             text-decoration: underline;
-            font-size: 0.9rem;
+        }
+
+
+        @media (max-aspect-ratio: 16/9) {
+            .video-wrap iframe {
+                height: 50svh;
+                width: calc(50svh * 16 / 9);
+            }
+        }
+
+
+        @media (min-aspect-ratio: 16/9) {
+            .video-wrap iframe {
+                width: 100vw;
+                height: calc(100vw * 9 / 16);
+            }
+        }
         }
     </style>
 </head>
 
 <body>
 
-    <h1>BOUNCING</h1>
-    <p>A live performance by Violet Savage</p>
-    <p>Livestream begins 29 August, 7PM BST</p>
+    <div class="top">
+        <p>BOUNCING</p>
+        <br>
+        <p>A live performance by Violet Savage</p>
+        <p>Livestream begins 29 August, 7PM BST</p>
+    </div>
 
-
-    <div class="embed-container">
-        <iframe width="560" height="315"
-            src="https://www.youtube.com/embed/LHtzZf4T7xw?si=rgy5mx6IABXlQonc&amp;controls=0"
-            title="YouTube video player" frameborder="0"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+    <div class="video">
+        <iframe src="https://www.youtube.com/embed/LHtzZf4T7xw?autoplay=1&mute=1&controls=0&playsinline=1"
+            title="YouTube video player"
+            allow="autoplay; encrypted-media; clipboard-write; gyroscope; picture-in-picture; web-share"
             referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
     </div>
-    <p>“Looping until collapse”</p>
+
+    <p>Looping until collapse</p>
 
     <div class="credits">
         <p>Performer: Violet Savage</p>
@@ -84,9 +123,13 @@
     </div>
 
     <p>
-        <a href="https://www.instagram.com/bouncing.live" target="_blank">@bouncing.live</a> &nbsp; | &nbsp;
-        <a href="https://are.na/your-link-here" target="_blank">Are.na</a>
+        <a href="https://www.instagram.com/bouncing.live" target="_blank">@bouncing.live</a>
+
+        <a href="https://are.na/your-link-here" target="_blank"> Are.na </a>
     </p>
+    <br>
+
+
 
 </body>
 
