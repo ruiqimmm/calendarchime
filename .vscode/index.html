@@ -7,26 +7,20 @@
     <title>Bouncing — Livestream</title>
     <style>
         html,
-        body {
-            height: 100%;
-            margin: 0;
-            text: #464646;
-        }
+
 
         body {
             height: 100svh;
-            /* 关键：整页高度锁定 */
             overflow: hidden;
-            /* 不滚动 */
             color: var(--text);
             font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
             font-weight: 300;
-            /* Light weight */
+
 
 
 
             font-size: clamp(12px, 1.5vw, 14px);
-            /* 自适应字号，避免小屏溢出 */
+
             display: grid;
             grid-template-rows:
                 auto 50svh auto=1fr auto auto;
@@ -51,14 +45,14 @@
 
         /* 顶部三行打包，便于整体微调间距 */
         .top *+* {
-            margin-top: 0.25em;
+            margin-top: 0.4em;
         }
 
         /* 视频容器：宽度自适应，固定高度=50svh，保持16:9 */
         .video {
-            height: 60svh;
+            visibility: hidden;
+            height: 40svh;
             width: min(92vw, calc(50svh * 16/9));
-
             position: relative;
         }
 
@@ -72,6 +66,7 @@
 
         .credits {
             opacity: .6;
+            margin-bottom: 0.4em;
         }
 
         a {
@@ -94,7 +89,6 @@
                 height: calc(100vw * 9 / 16);
             }
         }
-        }
     </style>
 </head>
 
@@ -103,10 +97,14 @@
     <div class="top">
         <p>BOUNCING</p>
         <br>
-        <p>A live performance by Violet Savage</p>
-        <p>Livestream begins 29 August, 7PM BST</p>
+        <p>A live performance</p>
+        <p>Begins in 29 August, 7PM BST</p>
     </div>
-
+    <div>
+        <br>
+        <span id="countdown"></span>
+    </div>
+    <a href="https://www.instagram.com/bouncing.live" target="_blank">RSVP</a>
     <div class="video">
         <iframe src="https://www.youtube.com/embed/LHtzZf4T7xw?autoplay=1&mute=1&controls=0&playsinline=1"
             title="YouTube video player"
@@ -115,19 +113,47 @@
     </div>
 
     <p>Looping until collapse</p>
-
     <div class="credits">
-        <p>Performer: Violet Savage</p>
-        <p>Director: Ivory Pijin</p>
-        <p>Sound: Adrian Künstler</p>
+        <p>Performed by Violet Savage</p>
+        <p>Directed by Ivory Pijin</p>
+        <p>Video by Theo Thompson</p>
+        <p>Sound by Adrian Künstler</p>
+        <p>Design by Ruiqi Ma</p>
     </div>
 
     <p>
-        <a href="https://www.instagram.com/bouncing.live" target="_blank">@bouncing.live</a>
+        <a href="https://www.instagram.com/bouncing.live" target="_blank">Instagram</a>
 
         <a href="https://are.na/your-link-here" target="_blank"> Are.na </a>
     </p>
     <br>
+    <script>
+        // 29 Aug 2025, 7 PM BST = 18:00 UTC
+        const eventTime = new Date('2025-08-29T18:00:00Z');
+
+        function updateCountdown() {
+            const now = new Date();
+            let ms = eventTime - now;
+
+            if (ms <= 0) {
+                document.getElementById("countdown").textContent = "Event started!";
+                clearInterval(timer);
+                return;
+            }
+
+            const sec = Math.floor(ms / 1000);
+            const days = Math.floor(sec / 86400);
+            const hours = Math.floor((sec % 86400) / 3600);
+            const mins = Math.floor((sec % 3600) / 60);
+            const secs = sec % 60;
+
+            document.getElementById("countdown").textContent =
+                `${days}d ${hours}h ${mins}m ${secs}s`;
+        }
+
+        updateCountdown();
+        const timer = setInterval(updateCountdown, 1000);
+    </script>
 
 
 
