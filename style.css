@@ -19,7 +19,7 @@ div {
 
 body {
     font-size: 1vw;
-    letter-spacing: -0.03em;
+    letter-spacing: -0.05em;
     transition: 0.3s;
 }
 
@@ -94,14 +94,19 @@ body {
     width: 4vw;
     height: calc(12vw/2);
     display: flex;
-    background-color: rgb(255, 255, 255);
-    gap: 2px;
-    text-align: center;
-    display: flex;
     align-items: center;
-
-
+    justify-content: center;
+    background: #fff;
+    transition: background-color .3s;
 }
+
+#morning pre,
+#evening pre {
+    background: transparent;
+    margin: 0;
+    padding: 0;
+}
+
 
 .bottom {
     display: flex;
